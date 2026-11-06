@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <math.h>
+#include <unistd.h>
+#include <pigpio.h>
+#define PIN 17
+
 #define READING_COUNT 5
 double calculateAverage(double readings[], int count) {
     double total = 0;
@@ -19,8 +23,9 @@ int isOutOfRange(double temperature) {
 void checkReadings(double readings[], int count) {
     printf("\nReadings requiring attention:\n");
     for (int i = 0; i < count; i++) {
-        if (isOutOfRange(readings[i])) printf("%.1f F\n", readings[i]);
-        }
+        if (isOutOfRange(readings[i])) 
+            printf("%.1f F\n", readings[i]);
+    }
 }
 
 
