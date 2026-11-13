@@ -157,7 +157,7 @@ int main() {
     checkReadings(readings, READING_COUNT);
     
     /* Save to csv file. */
-    FILE *fp = fopen("../data/temperature_log.csv", "w");
+    FILE *fp = fopen("../data/temperature_log.csv", "a");
     if (fp == NULL) {
         perror("Error opening the file");
         return 1;
