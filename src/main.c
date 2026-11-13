@@ -157,7 +157,7 @@ int main() {
     checkReadings(readings, READING_COUNT);
     
     /* Save to csv file. */
-    FILE *fp = fopen("../data/temperature_log.csv", "r");
+    FILE *fp = fopen("../data/temperature_log.csv", "w");
     if (fp == NULL) {
         perror("Error opening the file");
         return 1;
@@ -166,7 +166,7 @@ int main() {
     fprintf(fp, "Temperature, System Status, Warning LED\n");
     
     for(int i = 0; i < READING_COUNT; i++) {
-        fprintf(fp, "%1.f, %s, %s", readings[i].temperature, readings[i].status, readings[i].led);
+        fprintf(fp, "%-15.1f %-15s %-15s \n", readings[i].temperature, readings[i].status, readings[i].led);
     }
     
     fclose(fp);
