@@ -157,13 +157,16 @@ int main() {
     checkReadings(readings, READING_COUNT);
     
     /* Save to csv file. */
-    FILE *fp = fopen("../data/temperature_log.csv", "a");
+    FILE *fp = fopen("../data/temperature_log.csv", "a+");
     if (fp == NULL) {
         perror("Error opening the file");
         return 1;
     }
     
-    fprintf(fp, "Temperature, System Status, Warning LED\n");
+    fseek(fp, 0, SEEK_END);
+    if(ftell(fp) == 0) { //print head only if there isn't any
+        fprintf(fp, "Temperature, System Status, Warning LED\n");
+    }
     
     for(int i = 0; i < READING_COUNT; i++) {
         fprintf(fp, "%-15.1f %-15s %-15s \n", readings[i].temperature, readings[i].status, readings[i].led);
